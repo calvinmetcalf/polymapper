@@ -1,1 +1,1 @@
-A Polymaps viewer developed for use in the http://datacouch.com/ project
+A rewrite of polymaps that just uses leaflet
