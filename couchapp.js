@@ -2,9 +2,9 @@ var couchapp = require('couchapp')
 var path = require('path')
 
 ddoc = 
-  { "_id":'_design/polymapper',
+  { "_id":'_design/geo',
     "description": "Simple GeoJSON visualizer using Polymaps",
-    "name": "Polymapper",
+    "name": "Couch Geo",
     "rewrites": [
       {
         "to": "index.html",
@@ -76,7 +76,31 @@ ddoc.lists = {
     send("]}");
     if ('callback' in req.query) send(")");
 
-  }
+  },
+kml:function(head, req) {
+    var row, out, sep = '\n';
+    /**
+ * A list function that transforms a spatial view result set into a KML feed.
+ * 
+ * @author Benjamin Erb
+ */
+    start({"headers":{"Content-Type" : "application/vnd.google-earth.kml+xml"}});
+    send('<?xml version="1.0" encoding="UTF-8"?>\n');
+    send('<kml xmlns="http://www.opengis.net/kml/2.2">\n');
+    send('<Document>\n');
+    send('<name>GeoCouch Result - KML Feed</name>\n');
+    while (row = getRow()) {
+    	if(row.value.geometry){
+            send('\t<Placemark>');
+            send('<name>'+row.id+'</name>');
+            send('<Point><coordinates>'+row.value.geometry.coordinates[0]+','+row.value.geometry.coordinates[1]+',0</coordinates></Point>');
+            send('</Placemark>\n');
+    	}
+    }
+    send('</Document>\n');
+    send('</kml>\n');
+}
+
 }
 
 couchapp.loadAttachments(ddoc, path.join(__dirname, 'attachments'));
