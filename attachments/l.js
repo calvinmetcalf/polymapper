@@ -22,6 +22,11 @@ var m = new L.Map('map',{
     });
 var gj =  new L.GeoJSON();
 m.addLayer(gj);
+gj.on("featureparse", function (e) {
+    if (e.properties && e.properties.popupContent){
+        e.layer.bindPopup(e.properties.popupContent);
+    }
+});
 var bbox=m.getBounds().toBBoxString();
   $.get("_spatiallist/geojson/full?bbox="+bbox,parseJSONP,"JSONP");
 function parseJSONP(data){
