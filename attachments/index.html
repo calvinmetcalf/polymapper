@@ -1,32 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-   "http://www.w3.org/TR/html4/strict.dtd">
+<!doctype html>
+<html lang="en"><head><meta charset='utf-8'>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="l/leaflet.css" />
+<!--[if lte IE 8]>
+<link rel="stylesheet" href="l/leaflet.ie.css" />
+<![endif]-->
 
-<html lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>GeoCouch</title>
-  <link href="style/reset.css" media="screen" rel="stylesheet" type="text/css" /> 
-  <link href="style/map.css" media="screen" rel="stylesheet" type="text/css" /> 
-  <script type="text/javascript" src="script/jquery-1.7.1.min.js"></script>
-  <script type="text/javascript" src="script/jquery.couch.js"></script>
-  <script type="text/javascript" src="script/polymaps-couchbb.min.js"></script>
-  <script type="text/javascript" src="script/jquery.selectbox.js"></script>
-  <script type="text/javascript" src="script/geojson-utils.js"></script>
-  <script type="text/javascript" src="script/map.js"></script>
-  <script type="text/javascript" src="script/maptip.js"></script>
+<script src="l/leaflet.js"></script>
+ <script type="text/javascript" src="script/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="script/jquery.couch.js"></script>
+<title>GeoCouch</title>
 </head>
-<body>
-  <div class="map_container"></div>
-  <div class="map_header"> 
-  	<h2><a href="http://github.com/maxogden/geocouch-utils">GeoCouch</a></h2> 
-    <i>Tiles courtesy <a href="http://developer.mapquest.com/web/products/open/map">MapQuest</a>; 
-	  Map Data &copy; 
-	  <a href="http://openstreetmap.org">OpenStreetMap</a>, CC-BY-SA
-	</i>
-  </div>
-  <div class="date"></div>
-  <div id="dialog">
-    <ul></ul>
-  </div>
-</body>
-</html>
+<body><div id='map'></div><script type="text/javascript" src="l.js"></script></body></html>
