@@ -4,16 +4,16 @@ function createCouch(url,db,user,pw){
 	var nano = require("nano")("https://"+user+":"+pw+"@"+url);
 	nano.db.create(db,function(e){
 		if(!e){return setUpCouch(url,db,user,pw)}
-	}
+	})
 
 }
 
 function setUpCouch(url,db,user,pw){
-var doc = require("./couchapp.js");
-var app = couchapp.createApp(doc,"https://"+user+":"+pw+"@"+url+"/"+db);
-app.push(function(e){
+var nano = require("nano")("https://"+user+":"+pw+"@"+url);
+nano.db.replicate("http://calvin.iriscouch.com/geo",db,function(e){
 if(!e){return permCouch(url,db,user,pw)}
-}
+});
+
 }
 
 function permCouch(url,db,user,pw){
@@ -23,23 +23,13 @@ db.insert({"language":"javascript","validate_doc_update":"function(newDoc, oldDo
 }});
 }
 
-function cleanJson(json){
-var lnglat = json.location.points[0].poslist.split(" ");
-json.geometry ={
-	type:"Point",
-	coordinates:[parseFloat(lnglat[1]),parseFloat(lnglat[0])]
-}
-return json;
-}
+function cleanJson(json){var rjson=json;var lnglat = json.location.points[0].poslist.split(" ");rjson.geometry ={type:"Point",coordinates:[parseFloat(lnglat[1]),parseFloat(lnglat[0])]};return rjson;};
 function upJson(url,db,user,pw,json){
-var j = require(json);
-var db = require("nano")("https://"+user+":"+pw+"@"+url+"/"+db);
-j.forEach(function(v){
-var id = v.id;
-var content = cleanJson(v);
-db.insert(content,id);
-});
-
+var d =require('nano')("https://"+user+":"+pw+"@"+url+"/"+db);
+var a = require(json);
+some(a.length%100,a);
+function some(n,a){while(n>0){var j = a.pop();d.insert(cleanJson(j),j.id);n--}return a.length;}
+this.some=some;
 }
-exports.newC = createCouch(url,db,user,pw);
-exports.up=upJson(url,db,user,pw,json);
+exports.newC = createCouch;
+exports.up=upJson;

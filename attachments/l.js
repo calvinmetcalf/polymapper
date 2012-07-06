@@ -23,8 +23,8 @@ var m = new L.Map('map',{
 var gj =  new L.GeoJSON();
 m.addLayer(gj);
 gj.on("featureparse", function (e) {
-    if (e.properties && e.properties.popupContent){
-        e.layer.bindPopup(e.properties.popupContent);
+    if (e.properties && e.properties.id){
+        e.layer.bindPopup(e.properties.id);
     }
 });
 var bbox=m.getBounds().toBBoxString();
