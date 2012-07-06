@@ -23,4 +23,23 @@ db.insert({"language":"javascript","validate_doc_update":"function(newDoc, oldDo
 }});
 }
 
+function cleanJson(json){
+var lnglat = json.location.points[0].poslist.split(" ");
+json.geometry ={
+	type:"Point",
+	coordinates:[parseFloat(lnglat[1]),parseFloat(lnglat[0])]
+}
+return json;
+}
+function upJson(url,db,user,pw,json){
+var j = require(json);
+var db = require("nano")("https://"+user+":"+pw+"@"+url+"/"+db);
+j.forEach(function(v){
+var id = v.id;
+var content = cleanJson(v);
+db.insert(content,id);
+});
+
+}
 exports.newC = createCouch(url,db,user,pw);
+exports.up=upJson(url,db,user,pw,json);
