@@ -1,0 +1,26 @@
+{
+  "name": "opoi",
+  "description": "Utilities for conecting the opoi registry and couchdb.",
+  "tags": [
+    "couchdb",
+    "poi",
+    "ogc"
+  ],
+  "version": "0.1.0",
+  "author": "Calvin Metcalf <calvin.metcalf@state.ma.us>",
+  "engines": {
+    "node": "~0.6.17"
+  },
+  "dependencies": {
+    "couchapp": "0.9.x",
+    "nano": "3.0.x"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "homepage": "https://github.com/calvinmetcalf/polymapper",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/calvinmetcalf/polymapper.git"
+  },
+  "main": "./app.js"
+}
